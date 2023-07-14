@@ -2,7 +2,7 @@
 /**
  * main - Entry point
  * Description: print all single digit numbers
- * Retuen: Always 0 (Success)
+ * Return: Always 0 (Success)
 */
 
 int main(void)
@@ -15,5 +15,6 @@ int main(void)
 		digit++;
 	}
 	printf("\n");
+
 	return (0);
 }
