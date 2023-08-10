@@ -2,19 +2,27 @@
 /**
  * _puts - prints a string, followed by new line
  * @str: pointer to string to print
- * Return: void
 */
 
 void _puts(char *str)
 {
-	int i = 0;
-
-	while (str[i])
+	while (*str)
 	{
-		_putchar(str[i]);
-		i++;
+		_putchar(*str);
+		str++;
 	}
+	putchar('\n');
 }
+/**
+ * _isdigit - checks if a character is a digit (0-9)
+ * @c: character to check
+ * Return: 1 if c is a digit, 0 otherwise
+ */
+int _isdigit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
 /**
  * _atoi - convert a string to an integer
  *@s: char type string
@@ -24,58 +32,47 @@ void _puts(char *str)
 int _atoi(const char *s)
 {
 	int sign = 1;
-	unsigned long int resp = 0, firstNum, i;
+	unsigned long int resp = 0, i = 0;
 
-	for (firstNum = 0; !(s[firstNum] >= 48 && s[firstNum] <= 57); firstNum++)
+	while (s[i])
 	{
-		if (s[firstNum] == '-')
+		if (s[i] == '-')
 		{
 			sign *= -1;
 		}
-	}
-	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
-	{
-		resp *= 10;
-		resp += (s[i] - 48);
+		else if (_isdigit(s[i]))
+		{
+			resp = resp * 10 + (s[i] - '0');
+		}
+		else
+		{
+			_puts("Error");
+			exit(98);
+		}
+		i++;
 	}
 	return (sign * resp);
 }
 
 /**
- * print_int -prints an integer
- * @n: int
- * Return: 0
- */
-
-void print_int(unsigned long int n)
-{
-	unsigned long int divisor = 1, i, resp;
-
-	for (i = 0; n / divisor > 9; i++, divisor *= 10)
-		;
-	for (; divisor >= 1; n %= divisor, divisor /= 10)
-	{
-		resp = n / divisor;
-		_putchar('0' + resp);
-	}
-}
-/**
  * main - prints the result of multiplication, followed by a new line
  * @argc: int
  * @argv: list
- * Return: 0
+ * Return: 0 on success, 98 on error
  */
 int main(int argc, char const *argv[])
 {
-	(void)argc;
-
-	if (argc != 3)
+	if (argc != 3 || !_isdigit(*argv[1]) || !_isdigit(*argv[2]))
 	{
-		_puts("Error ");
-		exit(98);
+		_puts("Error");
+		return (98);
 	}
-	print_int(_atoi(argv[1]) * _atoi(argv[2]));
-	_putchar('\n');
+
+	int num1 = _atoi(argv[1]);
+	int num2 = _atoi(argv[2]);
+	int result = num1 * num2;
+
+	printf("%d\n", result);
 
 	return (0);
 }
