@@ -14,7 +14,6 @@ void _puts(char *str)
 		_putchar(str[i]);
 		i++;
 	}
-	_putchar('\n');
 }
 /**
  * _atoi - convert a string to an integer
@@ -73,7 +72,7 @@ int main(int argc, char const *argv[])
 	if (argc != 3)
 	{
 		_puts("Error ");
-		return (98);
+		exit(98);
 	}
 	print_int(_atoi(argv[1]) * _atoi(argv[2]));
 	_putchar('\n');
