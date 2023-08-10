@@ -14,6 +14,7 @@ void _puts(char *str)
 		_putchar(str[i]);
 		i++;
 	}
+	_putchar('\n');
 }
 /**
  * _atoi - convert a string to an integer
@@ -30,7 +31,7 @@ int _atoi(const char *s)
 	{
 		if (s[firstNum] == '-')
 		{
-			sigh *= -1;
+			sign *= -1;
 		}
 	}
 	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
@@ -72,7 +73,7 @@ int main(int argc, char const *argv[])
 	if (argc != 3)
 	{
 		_puts("Error ");
-		exit(98);
+		return (98);
 	}
 	print_int(_atoi(argv[1]) * _atoi(argv[2]));
 	_putchar('\n');
