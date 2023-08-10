@@ -1,18 +1,21 @@
 #include "main.h"
-/**
- * _puts - prints a string, followed by new line
- * @str: pointer to string to print
-*/
+#include <stdio.h>
 
+
+/**
+ * _puts - prints a string, followed by a new line
+ * @str: pointer to the string to print
+ */
 void _puts(char *str)
 {
 	while (*str)
 	{
-		_putchar(*str);
+		putchar(*str);
 		str++;
 	}
 	putchar('\n');
 }
+
 /**
  * _isdigit - checks if a character is a digit (0-9)
  * @c: character to check
@@ -25,10 +28,9 @@ int _isdigit(char c)
 
 /**
  * _atoi - convert a string to an integer
- *@s: char type string
- *Return: integer converted
-*/
-
+ * @s: pointer to the string to convert
+ * Return: integer converted
+ */
 int _atoi(const char *s)
 {
 	int sign = 1;
@@ -55,12 +57,12 @@ int _atoi(const char *s)
 }
 
 /**
- * main - prints the result of multiplication, followed by a new line
- * @argc: int
- * @argv: list
+ * main - multiplies two positive numbers
+ * @argc: number of arguments
+ * @argv: array of arguments
  * Return: 0 on success, 98 on error
  */
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
 	if (argc != 3 || !_isdigit(*argv[1]) || !_isdigit(*argv[2]))
 	{
