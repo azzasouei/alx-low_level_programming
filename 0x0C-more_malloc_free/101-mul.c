@@ -17,13 +17,21 @@ void _puts(char *str)
 }
 
 /**
- * _isdigit - checks if a character is a digit (0-9)
- * @c: character to check
- * Return: 1 if c is a digit, 0 otherwise
+ * _is_positive_number - checks if a string is composed of digits and positive
+ * @s: pointer to the string to check
+ * Return: 1 if s is a positive number, 0 otherwise
  */
-int _isdigit(char c)
+int _is_positive_number(char *s)
 {
-	return (c >= '0' && c <= '9');
+	while (*s)
+	{
+		if (!_isdigit(*s))
+		{
+			return 0;
+		}
+		s++;
+	}
+	return 1;
 }
 
 /**
@@ -36,23 +44,23 @@ int _atoi(const char *s)
 	int sign = 1;
 	unsigned long int resp = 0, i = 0;
 
-	while (s[i])
+	if (*s == '-')
 	{
-		if (s[i] == '-')
-		{
-			sign *= -1;
-		}
-		else if (_isdigit(s[i]))
-		{
-			resp = resp * 10 + (s[i] - '0');
-		}
-		else
+		sign = -1;
+		s++;
+	}
+
+	while (*s)
+	{
+		if (!_isdigit(*s))
 		{
 			_puts("Error");
 			exit(98);
 		}
-		i++;
+		resp = resp * 10 + (*s - '0');
+		s++;
 	}
+
 	return (sign * resp);
 }
 
@@ -64,7 +72,7 @@ int _atoi(const char *s)
  */
 int main(int argc, char *argv[])
 {
-	if (argc != 3 || !_isdigit(*argv[1]) || !_isdigit(*argv[2]))
+	if (argc != 3 || !_is_positive_number(argv[1]) || !_is_positive_number(argv[2]))
 	{
 		_puts("Error");
 		return (98);
