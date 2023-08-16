@@ -1,4 +1,5 @@
 #include "3-calc.h"
+#include <stdlib.h>
 
 /**
  * get_op_func - returns pointer to right op func
@@ -18,11 +19,8 @@ int (*get_op_func(char *s))(int, int)
 	};
 	int i = 0;
 
-while (i < 5)
-{
-if (s && s[0] == ops[i].op[0] && !s[1])
-return (ops[i].f);
-i++;
-}
-return (NULL);
+	while (ops[i].op != NULL && *(ops[i].op) != *s)
+		i++;
+
+	return (ops[i].f);
 }
