@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "3-calc.h"
-
 /**
  * main - Prints the result of simple operations.
  * @argc: The number of arguments supplied to the program.
@@ -14,7 +13,6 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 	int num1, num2;
 	char *op;
-	int result;
 
 	if (argc != 4)
 	{
@@ -26,22 +24,20 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	op = argv[2];
 	num2 = atoi(argv[3]);
 
-	if (strlen(op) != 1)
+	if (get_op_func(op) == NULL || op[1] != '\0')
 	{
 		printf("Error\n");
 		exit(99);
 	}
 
-	result = get_op_func(op)(num1, num2);
-
 	if ((*op == '/' && num2 == 0) ||
-			(*op == '%' && num2 == 0))
+	    (*op == '%' && num2 == 0))
 	{
 		printf("Error\n");
 		exit(100);
 	}
 
-	printf("%d\n", result);
+	printf("%d\n", get_op_func(op)(num1, num2));
 
 	return (0);
 }
